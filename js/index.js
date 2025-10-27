@@ -10,6 +10,7 @@ appNames.forEach(appName=>{
     cover.classList.remove('active');
     const appEls =document.querySelectorAll('.app')
     //この処理を行うことにより、目的のエレメントにのみactiveクラスを付与することができる。
+    //選択したアプリをクリックするとそれのみが表示されるようになる
     appEls.forEach(appEl=>{
       appEl.classList.remove('active')
     })
