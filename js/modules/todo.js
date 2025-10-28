@@ -18,6 +18,7 @@ if(todoObj.content){
 }
 addInput.value='';
 updateLs();
+updataTodo();
 })
 
 //ローカルストレージにデータを保存する
@@ -70,13 +71,29 @@ function createTodoElement(todo){
       todo.isDone = false;
     }
     if(e.target.classList.contains('edit-btn')){
-      
+      addInput.value =e.target.parentElement.previousElementSibling.
+      textContent;
+      todoData =todoData.filter(data =>data !== todo)
+      addInput.focus();
     }
     if(e.target.classList.contains('delete-btn')){
-      
+      todoData = todoData.filter((data) => data !== todo);
     }
+    updateLS();
+    updataTodo();
   })
 }
 
-createTodoElement({content:'remains to do',isDone:false});
-createTodoElement({content:'already done', isDone:true})
+function updataTodo() {
+  todosUl.innerHTML = '';
+  donesUl.innerHTML = '';
+  todoData = getTodoData();
+  todoData.forEach((todo) => {
+    createTodoElement(todo);
+  });
+}
+
+updataTodo();
+
+
+
