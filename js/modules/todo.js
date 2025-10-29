@@ -2,6 +2,9 @@ const addForm = document.querySelector('.td-add-form')
 const addInput = document.querySelector('.td-add-input')
 const todosUI = document.querySelector('.todos')
 const donesUI = document.querySelector('.dones')
+const searchForm = document.querySelector('.td-search-form');
+const searchInput = document.querySelector('.td-search-input');
+
 
 let todoData=[]
 addForm.addEventListener('submit',e => {
@@ -18,7 +21,7 @@ if(todoObj.content){
 }
 addInput.value='';
 updateLs();
-updataTodo();
+updateTodo();
 })
 
 //ローカルストレージにデータを保存する
@@ -79,21 +82,40 @@ function createTodoElement(todo){
     if(e.target.classList.contains('delete-btn')){
       todoData = todoData.filter((data) => data !== todo);
     }
-    updateLS();
-    updataTodo();
+    updateLs();
+    updateTodo();
   })
 }
 
-function updataTodo() {
-  todosUl.innerHTML = '';
-  donesUl.innerHTML = '';
+function updateTodo() {
+  todosUI.innerHTML = '';
+  donesUI.innerHTML = '';
   todoData = getTodoData();
   todoData.forEach((todo) => {
     createTodoElement(todo);
   });
 }
 
-updataTodo();
+
+
+// updateTodo();
+
+searchForm.addEventListener('submit', () => {
+  e.preventDefault();
+});
+
+//入力欄に文字を打つたびに、TODOの中身を検索して、合わないものは隠す処理
+searchInput.addEventListener('keyup', () => {
+  const searchword = searchInput.value.trim().toLowerCase();
+  const todoItems = document.querySelectorAll('.td-item');
+  todoItems.forEach((todoItem) => {
+    todoItem.classList.remove('hide');
+    if (!todoItem.textContent.toLowerCase().includes(searchword)) {
+      todoItem.classList.add('hide');
+    }
+  });
+});
+
 
 
 
