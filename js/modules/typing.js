@@ -8,7 +8,7 @@ let timelimit=30;
 let remaingTime;
 
 timeSelectEl.addEventListener('change', () => {
-  timelimit = parseInt(timeSelectEl.value, 10); // 数字に変換
+  timelimit = timeSelectEl.value;
 });
 
 window.addEventListener('keypress',e=>{
