@@ -97,12 +97,43 @@
 
         <!-- slide-puzzle app -->
         <section id="slide-puzzle" class='app'>
-            <h1>Slide Puzzle</h1>
+            <div class="sp-cover">
+                <h1>Slide Puzzle</h1>
+                <ul class="sp-menu">
+                    <p>select the level</p>
+                    <li data-level="easy">easy</li>
+                    <li data-level="medium">medium</li>
+                    <li data-level="difficult">difficult</li>
+                </ul>
+            </div>
+            <div class="sp-container">
+                <img alt="" id="sp-original-image">
+                <div class="sp-info-panel">
+                    <img src="./images/slide_puzzle/picture.png" alt="" id="sp-show-original-btn">
+                    <div class="sp-moves">Moves: <span class="sp-counter"></span></div>
+                    <div class="sp-back-to-menu">Back to Menu</div>
+                </div>
+                <div class="sp-screen">
+                </div>
+            </div>
         </section>
 
         <!-- memory-card app -->
         <section id="memory-card" class='app'>
-            <h1>Memory Card</h1>
+            <div class="mc-container">
+                <div class="mc-info-panel">
+                    <div>time passed: <span class='mc-time'>00:00</span></div>
+                    <div>matched: <span class='mc-matched'>0</span></div>
+                    <div>failed: <span class='mc-failed'>0</span></div>
+                    <span class="mc-reset-btn">reset</span>
+                </div>
+                <div class="mc-deck"></div>
+            </div>
+            <div class="mc-congrats">
+                <h1>CONGRATULATION!!!</h1>
+                <h2>You made it in <span></span>seconds</h2>
+                <div class="mc-retry-btn">RETRY</div>
+            </div>
         </section>
 
         <!--  game-of-life app -->
