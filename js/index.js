@@ -2,12 +2,14 @@ import * as Todo from './modules/todo.js'
 import * as Typing from './modules/typing.js'
 import * as Slide from './modules/slide.js'
 import * as Memory from './modules/memory.js';
+import * as Life from './modules/life.js'
 
 const nav = document.querySelector('#nav');
 const cover =document .querySelector('#cover')
 const appNames =['todo','typing','slide-puzzle','memory-card','life'];
 
 appNames.forEach(appName=>{
+  console.log(appName)
   const menu = document.createElement('a')
   menu.classList.add('nav-menu') 
   menu.textContent = appName.toUpperCase();
@@ -27,5 +29,6 @@ appNames.forEach(appName=>{
     })
     menu.classList.add('active')
   })
+  console.log(menu)
   nav.appendChild(menu)
 })
