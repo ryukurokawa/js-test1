@@ -21,7 +21,7 @@ const levelMap = {
   difficult: { grid: 'auto auto auto auto', size: 4 },
 };
 
-//クリックされたレベルに応じてスライドパズルを初期化し、ゲームを始めるための処理です。
+//クリックされたレベルに応じてスライドパズルを初期化し、ゲームを始めるための処理
 menu.forEach((item) => {
   item.addEventListener('click', () => {
     menuCover.classList.add('hide');
@@ -45,6 +45,7 @@ backToMenu.addEventListener('click', () => {
   screen.classList.remove('zoom');
 });
 
+//この複数ある画像の中からランダムに 1 枚選び、パズルの元画像として HTML の <img> 要素に設定している処理です。
 function setOriginalImage() {
   selectedImage = images[Math.floor(Math.random() * images.length)];
   originalImage.setAttribute(
@@ -70,9 +71,11 @@ showOriginalBtn.addEventListener('mouseleave', () => {
   originalImage.classList.remove('show');
 });
 
+//配列 arr に基づいて、パズルのタイルを一つひとつ HTML に描画する関数です。
 function renderTiles(arr) {
   screen.innerHTML = '';
   arr.forEach((tile, index) => {
+    //createELEMENTはjavaScriptのDOM APIの関数で新しい HTML 要素を作成するために使う
     const div = document.createElement('div');
     div.classList.add('sp-tile');
     if (index === hiddenTileIndex) {
@@ -84,14 +87,19 @@ function renderTiles(arr) {
 }
 
 function start() {
+  //ランダムに画像を1つ選び、それを完成見本（オリジナル画像）として表示します。
   setOriginalImage();
   count = 0;
   counter.textContent = count;
+  //タイルの番号をシャッフルして ランダムな並び順にする関数
   tilesArray = generateShuffledArray(orderedArray);
+  //シャッフルされた tilesArray を元に、画面上にタイルを表示
   renderTiles(tilesArray);
+  //パズル全体の状態（タイルの並び）をもとに、画面上の配置を最新の状態に反映するための関数
   updateScreen();
 }
 
+//配列の要素をランダムに並べ替える（シャッフルする）処理
 function generateShuffledArray(arr) {
   let shuffledArray = arr.slice();
   for (let i = shuffledArray.length - 1; i > -1; i--) {
@@ -103,11 +111,13 @@ function generateShuffledArray(arr) {
   return shuffledArray;
 }
 
+//パズル全体の状態（タイルの並び）をもとに、画面上の配置を最新の状態に反映する」ための関数
 function updateScreen() {
   tiles = document.querySelectorAll('.sp-tile');
   const hiddenTileRow = Math.floor(hiddenTileIndex / size);
   const hiddenTileCol = hiddenTileIndex % size;
 
+  //スライドパズルのタイルを1枚動かす処理を行っている
   function generateNewArray(arr, index, hiddenTileIndex) {
     const tempValue = arr[index];
     arr[index] = arr[hiddenTileIndex];
@@ -115,6 +125,7 @@ function updateScreen() {
     return arr;
   }
 
+  //1枚タイルを動かしたときのメイン処理
   function updateTiles(index) {
     tilesArray = generateNewArray(tilesArray, index, hiddenTileIndex);
     hiddenTileIndex = index;
@@ -147,6 +158,7 @@ function updateScreen() {
   });
 }
 
+//この関数はゲームクリア時の見た目を整える演出用関数です
 function complete() {
   tiles[hiddenTileIndex].classList.remove('hidden');
   screen.classList.add('zoom');
