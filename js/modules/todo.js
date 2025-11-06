@@ -29,10 +29,12 @@ function updateLs(){
   localStorage.setItem('myTodo',JSON.stringify(todoData));
 }
 
+//ブラウザの localStorage に保存してある「myTodo」データを取り出して、使える形（配列やオブジェクト）に変換して返す 処理
 function getTodoData(){
   return JSON.parse(localStorage.getItem('myTodo'))
 }
 
+//ToDoを画面に表示するための部品を作る処理
 function createTodoElement(todo){
   const todoItem = document.createElement('li');
   todoItem.classList.add('td-item')
@@ -87,11 +89,13 @@ function createTodoElement(todo){
   })
 }
 
+//保存されているToDoデータを読み込んで、画面を作り直す処理
 function updateTodo() {
   todosUI.innerHTML = '';
   donesUI.innerHTML = '';
   todoData = getTodoData();
   todoData.forEach((todo) => {
+    //ToDoを画面に表示するための部品を作る処理
     createTodoElement(todo);
   });
 }

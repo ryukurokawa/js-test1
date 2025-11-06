@@ -63,8 +63,10 @@ backToStart.addEventListener('click', () => {
   isPlaying = false;
 });
 
+//タイピングゲームなどの結果画面を表示するための処理
 function showResult() {
   textarea.disabled = true;
+  //setInterval() で動かしている処理（タイマー）を止める
   clearInterval(intervalId);
   LPMCount =
     remainingTime === 0
@@ -84,6 +86,7 @@ function showResult() {
   }, 1000);
 }
 
+//ランダムな言葉（quote）をAPIから取得して、画面に1文字ずつ表示する処理
 async function fetchAndRenderQuotes() {
   quote.innerHTML = '';
   textarea.value = '';
